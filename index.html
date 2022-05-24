@@ -8,9 +8,17 @@
     <link href="index.css" rel="stylesheet" />
   </head>
   <body>
-    <h1>🖊️Notes🖊️</h1>
+    <h1>To do List and Notes</h1>
 
-    <input id="inputbox" placeholder="Enter Note here ⌨️" type="text" value="" />
+    <input
+      id="inputbox"
+      placeholder="Enter thoughts here.. ⌨️"
+      type="text"
+      value=""
+      type="text"
+      max="175"
+      onkeypress="if (this.value.length > 175) return false;"
+    />
     <div id="buttoncontainer">
       <button id="addbutton">Add Note</button>
       <button id="deleteallbtn">Delete All</button>

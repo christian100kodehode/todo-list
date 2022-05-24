@@ -4,7 +4,7 @@ let addBtn = document.querySelector("#addbutton");
 let deleteAllBtn = document.querySelector("#deleteallbtn");
 let sortBtn = document.querySelector("#sortbtn");
 
-// Add Event listeners for the two buttons
+// Add Event listeners for the two buttons and exclude whitespace
 
 sortBtn.addEventListener("click", (e) => {
   sortList();
@@ -28,26 +28,29 @@ addBtn.addEventListener("click", (e) => {
   // document.querySelector("#noteitem").innerHTML += `<li> ${inputItem.value} </li> `;
   inputItem.value = "";
   inputItem.focus();
+  inputItem.trim();
 });
 
 function addto() {
   // Get currentime when using the function
-  let currentDate = new Date();
-  let cDay = currentDate.getDate();
-  let cMonth = currentDate.getMonth() + 1;
-  let cYear = currentDate.getFullYear();
-  let cHour = currentDate.getHours();
-  let cMinute = currentDate.getMinutes();
+
+  let time = new Date();
 
   const todoElements = document.createElement("li");
-  todoElements.innerText = `✅ ${inputItem.value}
+  const timeElements = document.createElement("p");
 
-  ${cHour}:${cMinute} ${cDay}/${cMonth}/${cYear}`;
+  let options = { hour: "numeric", minute: "numeric", month: "long", day: "numeric" };
+  timeElements.innerText = `${time.toLocaleString("en-GB", options)}`;
+  todoElements.innerText = `✅ ${inputItem.value}`;
+  timeElements.className = "timelmnt";
 
-  console.log(inputItem);
+  // timeElements.innerText = `Time ${cHour}:${cMinute} ${cDay}/${cMonth}/${cYear}`;
 
   const todoList = document.querySelector("#noteitem");
-  todoList.append(todoElements);
+
+  todoList.prepend(todoElements);
+
+  todoElements.append(timeElements);
   console.log(todoList);
 
   const deleteBtn = document.createElement("button");
@@ -69,15 +72,13 @@ function sortList() {
     // Start by saying: no switching is done:
     switching = false;
     b = list.getElementsByTagName("LI");
-
     // Loop through all list items:
     for (i = 0; i < b.length - 1; i++) {
       // Start by saying there should be no switching:
       shouldSwitch = false;
       /* Check if the next item should
       switch place with the current item: */
-      if (b[i].textContent.toLowerCase() > b[i + 1].textContent.toLowerCase());
-      {
+      if (b[i].textContent.toLowerCase() > b[i + 1].textContent.toLowerCase()) {
         /* If next item is alphabetically lower than current item,
         mark as a switch and break the loop: */
         shouldSwitch = true;
