@@ -61,12 +61,12 @@ function addto(todo) {
   todoElements.append(timeElements);
   // Using prepend to get item first in the list (before first child of a parent node)
   todoList.prepend(todoElements);
-  // Make delete button
+  // Make delete button and add it to the todoElements (li)
   const deleteBtn = document.createElement("button");
   deleteBtn.textContent = "❌ Delete";
   deleteBtn.className = "deleteBtn1";
   todoElements.append(deleteBtn);
-  // Remove the list item and remove item from the array on click of button
+  // Remove the list item and remove item from the array on click of button, get indexOf array item and splice it
   deleteBtn.addEventListener("click", function () {
     todoElements.remove();
     taskArray.splice(taskArray.indexOf(todo), 1);
